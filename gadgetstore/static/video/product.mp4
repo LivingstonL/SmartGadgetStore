@@ -1,0 +1,2 @@
+{% load static %}
+<source src="{% static 'video/product.mp4' %}" type="video/mp4">

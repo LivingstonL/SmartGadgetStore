@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Track Order</title>
+
+    <style>
+body{
+    font-family: Arial, sans-serif;
+}
+
+.progress-container{
+    display:flex;
+    justify-content:space-between;
+    position:relative;
+    margin:50px 0;
+}
+
+.progress-container::before{
+    content:'';
+    position:absolute;
+    top:20px;
+    left:10%;
+    width:80%;
+    height:5px;
+    background:#ddd;
+    z-index:0;
+}
+
+.step{
+    position:relative;
+    z-index:1;
+    text-align:center;
+    width:120px;
+}
+
+.circle{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#ddd;
+    color:white;
+    line-height:40px;
+    margin:auto;
+    font-size:20px;
+}
+
+.active .circle{
+    background:#28a745;
+}
+
+.label{
+    margin-top:10px;
+    font-weight:bold;
+}
+.product-card{
+    display:flex;
+    gap:30px;
+    background:#111;
+    padding:25px;
+    border-radius:20px;
+    color:white;
+    margin-top:20px;
+}
+
+.product-image img{
+    width:250px;
+    border-radius:20px;
+    object-fit:cover;
+}
+
+.product-info{
+    flex:1;
+}
+</style>
+</head>
+<body>
+
+<h1>Track Your Order</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <input type="text" name="tracking_number"
+           placeholder="Enter Tracking Number"
+           required>
+    <button type="submit">Track</button>
+</form>
+
+{% if order %}
+
+<hr>
+
+<h2>Order Details</h2>
+
+<div class="product-card">
+
+    <div class="product-image">
+        <img src="{{ order.product.image.url }}"
+             alt="{{ order.product.name }}">
+    </div>
+
+    <div class="product-info">
+        <h2>{{ order.product.name }}</h2>
+<p><b>Customer:</b> {{ order.customer_name }}</p>
+<p><b>Phone:</b> {{ order.phone }}</p>
+<p><b>Address:</b> {{ order.address }}</p>
+<p><b>Payment:</b> {{ order.payment_method }}</p>
+<p><b>Total:</b> ₹{{ order.total }}</p>
+<p><b>Tracking Number:</b> {{ order.tracking_number }}</p>
+
+<h3>Status: {{ order.status }}</h3>
+
+<div class="progress-container">
+
+    <div class="step {% if order.status == 'Pending' or order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}">
+        <div class="circle">✓</div>
+        <div class="label">Order Placed</div>
+    </div>
+
+    <div class="step {% if order.status == 'Shipped' or order.status == 'Delivered' %}active{% endif %}">
+        <div class="circle">🚚</div>
+        <div class="label">Shipped</div>
+    </div>
+
+    <div class="step {% if order.status == 'Delivered' %}active{% endif %}">
+        <div class="circle">✓</div>
+        <div class="label">Delivered</div>
+    </div>
+
+</div>
+{% endif %}
+
+</body>
+</html>

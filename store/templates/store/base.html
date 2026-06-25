@@ -1,0 +1,213 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}iMart{% endblock %}</title>
+
+    <link rel="stylesheet"
+          href="{% static 'css/style.css' %}">
+</head>
+<style>
+
+body{
+    margin:0;
+    padding:0;
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
+    overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:99999;
+
+    background:#000;
+
+    height:48px;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:28px;
+
+    border-bottom:1px solid #222;
+}
+
+.navbar a{
+    color:white;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.brand{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.store-name{
+    color:white;
+    font-size:18px;
+    font-weight:600;
+}
+
+.nav-item{
+    position:relative;
+}
+
+/* MEGA MENU */
+
+.mega-menu{
+    display:none;
+
+    position:fixed;
+    top:48px;
+    left:0;
+
+    width:100%;
+
+    background:#111;
+
+    padding:40px 80px;
+
+    grid-template-columns:repeat(3,1fr);
+    gap:60px;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.5);
+
+    z-index:99998;
+}
+
+.nav-item:hover .mega-menu{
+    display:grid;
+}
+
+.mega-title{
+    color:#86868b;
+    font-size:12px;
+    margin-bottom:15px;
+}
+
+.big-link{
+    display:block;
+    color:white;
+    font-size:28px;
+    font-weight:600;
+    margin-bottom:12px;
+}
+
+.small-link{
+    display:block;
+    color:#d2d2d7;
+    font-size:16px;
+    margin-bottom:10px;
+}
+
+.big-link:hover,
+.small-link:hover{
+    color:#2997ff;
+}
+
+/* LOGO */
+
+.logo-spin{
+    animation:floatLogo 3s ease-in-out infinite;
+}
+
+@keyframes floatLogo{
+    0%{transform:translateY(0);}
+    50%{transform:translateY(-4px);}
+    100%{transform:translateY(0);}
+}
+
+/* SEARCH */
+
+.nav-search{
+    font-size:18px;
+}
+
+.search-overlay{
+    display:none;
+}
+
+.search-overlay.active{
+    display:block;
+}
+
+.cart-link{
+    font-size:14px;
+}
+@media (max-width:768px){
+
+.navbar{
+    gap:12px;
+    overflow-x:auto;
+    justify-content:flex-start;
+    padding:0 15px;
+}
+
+.navbar a{
+    white-space:nowrap;
+    font-size:12px;
+}
+
+.store-name{
+    font-size:16px;
+}
+
+.mega-menu{
+    display:none !important;
+}
+
+}
+img{
+    max-width:100%;
+    height:auto;
+}
+html{
+    overflow-x:hidden;
+}
+.container,
+.wrapper{
+    width:100%;
+    max-width:1400px;
+    margin:auto;
+    padding:15px;
+}
+@media (max-width:768px){
+
+h1{
+    font-size:32px !important;
+}
+
+h2{
+    font-size:26px !important;
+}
+
+h3{
+    font-size:22px !important;
+}
+
+button,
+.btn{
+    min-height:50px;
+}
+
+}
+.product-image{
+    width:250px;
+    border-radius:20px;
+    margin-bottom:20px;
+}
+</style></body>
+{% include 'store/navbar.html' %}
+
+{% block content %}
+{% endblock %}
+
+</body>
+</html>

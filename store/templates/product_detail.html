@@ -1,0 +1,455 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ product.name }}
+{% endblock %}
+
+{% block content %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{{ product.name }}</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+}
+
+body{
+background:#fff;
+color:#1d1d1f;
+overflow-x:hidden;
+}
+
+/* NAVBAR */
+
+.navbar{
+position:sticky;
+top:0;
+z-index:9999;
+height:48px;
+background:rgba(255,255,255,.85);
+backdrop-filter:blur(20px);
+display:flex;
+justify-content:center;
+align-items:center;
+gap:35px;
+border-bottom:1px solid #eee;
+}
+
+.navbar a{
+text-decoration:none;
+color:#1d1d1f;
+font-size:13px;
+}
+
+/* HERO */
+
+.hero{
+position:relative;
+height:100vh;
+overflow:hidden;
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.25);
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+}
+
+.hero-overlay h1{
+font-size:90px;
+font-weight:700;
+letter-spacing:-4px;
+}
+
+.hero-overlay p{
+font-size:30px;
+margin-top:15px;
+}
+
+/* PRODUCT SECTION */
+
+.product-wrapper{
+max-width:1400px;
+margin:auto;
+padding:100px 40px;
+display:flex;
+gap:80px;
+align-items:center;
+flex-wrap:wrap;
+}
+
+.product-image{
+flex:1;
+text-align:center;
+}
+
+.product-image img{
+width:100%;
+max-width:650px;
+transition:.4s;
+}
+
+.product-image img:hover{
+transform:scale(1.05);
+}
+
+.product-info{
+flex:1;
+}
+
+.product-info h2{
+font-size:64px;
+margin-bottom:20px;
+}
+
+.product-price{
+font-size:42px;
+font-weight:700;
+margin:25px 0;
+color:#0071e3;
+}
+
+.product-desc{
+font-size:20px;
+line-height:1.8;
+color:#666;
+}
+
+/* BUTTONS */
+
+.buttons{
+margin-top:35px;
+display:flex;
+gap:15px;
+}
+
+.btn{
+padding:15px 30px;
+border-radius:980px;
+text-decoration:none;
+font-size:17px;
+font-weight:600;
+transition:.3s;
+}
+
+.buy{
+background:#0071e3;
+color:white;
+}
+
+.buy:hover{
+transform:translateY(-2px);
+}
+
+.cart{
+border:1px solid #0071e3;
+color:#0071e3;
+}
+
+.cart:hover{
+background:#0071e3;
+color:white;
+}
+
+/* FEATURES */
+
+.features{
+background:#f5f5f7;
+padding:120px 40px;
+}
+
+.features h2{
+text-align:center;
+font-size:54px;
+margin-bottom:60px;
+}
+
+.feature-grid{
+max-width:1400px;
+margin:auto;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+.feature{
+background:white;
+padding:40px;
+border-radius:30px;
+text-align:center;
+box-shadow:0 10px 30px rgba(0,0,0,.05);
+transition:.3s;
+}
+
+.feature:hover{
+transform:translateY(-10px);
+}
+
+.feature h3{
+font-size:26px;
+margin-bottom:15px;
+}
+
+.feature p{
+color:#666;
+line-height:1.7;
+}
+
+/* SPECIFICATIONS */
+
+.specs{
+padding:120px 40px;
+max-width:1200px;
+margin:auto;
+}
+
+.specs h2{
+font-size:54px;
+text-align:center;
+margin-bottom:60px;
+}
+
+.spec-card{
+background:#f5f5f7;
+padding:35px;
+border-radius:30px;
+margin-bottom:20px;
+display:flex;
+justify-content:space-between;
+font-size:18px;
+}
+
+/* STORY */
+
+.story{
+background:black;
+color:white;
+padding:140px 40px;
+text-align:center;
+}
+
+.story h2{
+font-size:70px;
+margin-bottom:25px;
+}
+
+.story p{
+max-width:900px;
+margin:auto;
+font-size:22px;
+line-height:1.8;
+color:#d2d2d7;
+}
+
+/* STICKY BUY BAR */
+
+.sticky-buy{
+position:fixed;
+bottom:20px;
+left:50%;
+transform:translateX(-50%);
+background:white;
+padding:15px 25px;
+border-radius:20px;
+box-shadow:0 10px 40px rgba(0,0,0,.15);
+display:flex;
+align-items:center;
+gap:20px;
+z-index:9999;
+}
+
+.sticky-price{
+font-size:24px;
+font-weight:700;
+}
+
+.footer{
+background:#f5f5f7;
+padding:70px 20px;
+text-align:center;
+margin-top:80px;
+}
+
+@media(max-width:768px){
+
+.hero-overlay h1{
+font-size:48px;
+}
+
+.hero-overlay p{
+font-size:20px;
+}
+
+.product-info h2{
+font-size:42px;
+}
+
+.product-price{
+font-size:30px;
+}
+
+.sticky-buy{
+width:95%;
+justify-content:space-between;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+{% include 'store/navbar.html' %}
+{% if product.hero_image %}
+<section class="hero">
+<img src="{{ product.hero_image.url }}">
+<div class="hero-overlay">
+<h1>{{ product.name }}</h1>
+<p>Power. Performance. Perfection.</p>
+</div>
+</section>
+{% endif %}
+
+<section class="product-wrapper">
+
+<div class="product-image">
+{% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+{% else %}
+    <img src="{% static 'images/no-image.png' %}" alt="No Image">
+{% endif %}
+</div>
+
+<div class="product-info">
+
+<h2>{{ product.name }}</h2>
+
+<div class="product-price">
+₹{{ product.price }}
+</div>
+
+<div class="product-desc">
+{{ product.description }}
+</div>
+
+<div class="buttons">
+
+<a href="{% url 'buy_now' product.id %}" class="btn buy">
+Buy Now
+</a>
+
+<a href="{% url 'add_to_cart' product.id %}" class="btn cart">
+Add to Cart
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="features">
+
+<h2>Why You'll Love It</h2>
+
+<div class="feature-grid">
+
+<div class="feature">
+<h3>⚡ Lightning Fast</h3>
+<p>Powerful performance for everything you do.</p>
+</div>
+
+<div class="feature">
+<h3>🔋 All-Day Battery</h3>
+<p>Designed to keep going when you do.</p>
+</div>
+
+<div class="feature">
+<h3>📸 Advanced Camera</h3>
+<p>Capture stunning moments with precision.</p>
+</div>
+
+<div class="feature">
+<h3>🛡 Premium Quality</h3>
+<p>Built using the finest materials.</p>
+</div>
+
+</div>
+
+</section>
+
+<section class="specs">
+
+<h2>Specifications</h2>
+
+<div class="spec-card">
+<span>Category</span>
+<strong>{{ product.category }}</strong>
+</div>
+
+<div class="spec-card">
+<span>Price</span>
+<strong>₹{{ product.price }}</strong>
+</div>
+
+<div class="spec-card">
+<span>Stock Available</span>
+<strong>{{ product.stock }}</strong>
+</div>
+
+</section>
+
+<section class="story">
+
+<h2>{{ product.name }}</h2>
+
+<p>
+Experience next-generation innovation, elegant design,
+and extraordinary performance in one premium device.
+Built to deliver an exceptional experience every day.
+</p>
+
+</section>
+
+<div class="sticky-buy">
+
+<div class="sticky-price">
+₹{{ product.price }}
+</div>
+
+<a href="{% url 'buy_now' product.id %}" class="btn buy">
+Buy
+</a>
+
+<a href="{% url 'add_to_cart' product.id %}" class="btn cart">
+Cart
+</a>
+
+</div>
+
+<footer class="footer">
+<h3>Smart Gadget Store</h3>
+<p>Premium Apple-inspired shopping experience.</p>
+</footer>
+
+{% endblock %}

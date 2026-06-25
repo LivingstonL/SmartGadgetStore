@@ -1,0 +1,157 @@
+{% extends 'store/base.html' %}
+
+{% block content %}
+<style>
+body{
+    background:#f5f5f7;
+}
+
+.orders-title{
+    text-align:center;
+    margin:40px 0;
+    font-size:42px;
+    font-weight:700;
+}
+
+.order-card{
+    background:#fff;
+    border-radius:24px;
+    padding:30px;
+    margin-bottom:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    display:flex;
+    gap:30px;
+    align-items:center;
+}
+
+.product-image{
+    width:250px;
+    height:250px;
+    object-fit:contain;
+    border-radius:20px;
+    background:#fafafa;
+    padding:15px;
+}
+
+.order-details{
+    flex:1;
+}
+
+.product-name{
+    font-size:30px;
+    font-weight:700;
+    margin-bottom:15px;
+}
+
+.info{
+    margin:8px 0;
+    color:#555;
+    font-size:16px;
+}
+
+.status{
+    display:inline-block;
+    padding:8px 18px;
+    border-radius:30px;
+    font-weight:600;
+    margin-top:10px;
+}
+
+.pending{
+    background:#fff3cd;
+}
+
+.shipped{
+    background:#d1ecf1;
+}
+
+.delivered{
+    background:#d4edda;
+}
+
+.btn-group{
+    margin-top:20px;
+}
+
+.track-btn,
+.invoice-btn{
+    display:inline-block;
+    text-decoration:none;
+    padding:12px 24px;
+    border-radius:30px;
+    font-weight:600;
+    margin-right:10px;
+}
+
+.track-btn{
+    background:#0071e3;
+    color:white;
+}
+
+.invoice-btn{
+    background:#34c759;
+    color:white;
+}
+
+.track-btn:hover,
+.invoice-btn:hover{
+    transform:translateY(-2px);
+}
+</style>
+<h1 class="orders-title">My Orders</h1>
+
+{% for order in orders %}
+
+<div class="order-card">
+
+    {% if order.product %}
+        <img src="{{ order.product.image.url }}"
+             class="product-image"
+             alt="{{ order.product.name }}">
+    {% endif %}
+
+    <div class="order-details">
+
+        <div class="product-name">
+            {{ order.product.name }}
+        </div>
+
+        <div class="info">👤 {{ order.customer_name }}</div>
+        <div class="info">📞 {{ order.phone }}</div>
+        <div class="info">📍 {{ order.address }}</div>
+        <div class="info">💳 {{ order.payment_method }}</div>
+        <div class="info">₹ {{ order.total }}</div>
+        <div class="info">🔢 {{ order.tracking_number }}</div>
+
+        {% if order.status == "Pending" %}
+            <div class="status pending">🟡 Pending</div>
+        {% elif order.status == "Shipped" %}
+            <div class="status shipped">🚚 Shipped</div>
+        {% elif order.status == "Delivered" %}
+            <div class="status delivered">✅ Delivered</div>
+        {% endif %}
+
+        <div class="btn-group">
+            <a href="{% url 'track_order' order.id %}"
+               class="track-btn">
+                📦 Track Order
+            </a>
+
+            <a href="{% url 'download_invoice' order.id %}"
+               class="invoice-btn">
+                📄 Download Invoice
+            </a>
+        </div>
+
+    </div>
+
+</div>
+
+{% empty %}
+
+<h3 style="text-align:center;">
+    No Orders Yet
+</h3>
+
+{% endfor %}
+{% endblock %}

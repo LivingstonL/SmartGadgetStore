@@ -1,0 +1,1106 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+Home
+{% endblock %}
+
+{% block content %}
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>iMart</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+    background:#fff;
+    color:#1d1d1f;
+}
+
+/* Navbar */
+
+.navbar{
+    position:sticky;
+    top:0;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:35px;
+
+    height:48px;
+
+    background:#000;
+
+    border-bottom:1px solid #222;
+
+    z-index:10000;
+}
+
+.navbar a{
+    color:#f5f5f7;
+    text-decoration:none;
+    font-size:13px;
+}
+
+.navbar a:hover{
+    color:#2997ff;
+}
+/* Hero */
+
+.hero{
+    text-align:center;
+    padding:80px 20px;
+    background:#fbfbfd;
+}
+
+.hero h1{
+    font-size:72px;
+    font-weight:700;
+    letter-spacing:-2px;
+}
+
+.hero p{
+    font-size:28px;
+    margin-top:10px;
+}
+
+.hero-buttons{
+    margin-top:25px;
+}
+
+.btn{
+    display:inline-block;
+    padding:12px 24px;
+    border-radius:980px;
+    text-decoration:none;
+    margin:0 8px;
+}
+
+.btn-primary{
+    background:#0071e3;
+    color:white;
+}
+
+.btn-secondary{
+    color:#0071e3;
+}
+
+/* Product Grid */
+
+.products{
+    max-width:1400px;
+    margin:auto;
+    padding:50px 20px;
+}
+
+.products-title{
+    font-size:48px;
+    font-weight:700;
+    margin-bottom:40px;
+    text-align:center;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+    gap:30px;
+}
+
+.card{
+    background:white;
+    border-radius:32px;
+    overflow:hidden;
+    box-shadow:0 8px 30px rgba(0,0,0,.06);
+transition:.35s;
+}
+
+.card:hover{
+    transform:translateY(-8px);
+}
+
+.card img{
+    width:100%;
+    padding:25px;
+    background:white;
+}
+
+.card:hover img{
+    transform:scale(1.08);
+}
+.card-content{
+    padding:25px;
+}
+.hero-dark .btn-secondary{
+    color:#2997ff;
+}
+
+@media(max-width:768px){
+
+.hero-content h1{
+    font-size:48px;
+}
+
+.hero-content p{
+    font-size:20px;
+}
+
+}
+.category{
+    color:#6e6e73;
+    font-size:14px;
+}
+
+.card h3{
+    margin-top:8px;
+    font-size:28px;
+}
+
+.price{
+    color:#0071e3;
+    font-size:24px;
+    font-weight:700;
+    margin:12px 0;
+}
+
+.desc{
+    color:#6e6e73;
+    line-height:1.5;
+    margin-bottom:20px;
+}
+
+.actions{
+    display:flex;
+    gap:10px;
+}
+
+.buy-btn{
+    flex:1;
+    background:#0071e3;
+    color:white;
+    text-align:center;
+    padding:12px;
+    border-radius:980px;
+    text-decoration:none;
+}
+
+.cart-btn{
+    flex:1;
+    border:1px solid #0071e3;
+    color:#0071e3;
+    text-align:center;
+    padding:12px;
+    border-radius:980px;
+    text-decoration:none;
+}
+
+/* Footer */
+
+.footer{
+    background:#f5f5f7;
+    padding:60px 20px;
+    margin-top:80px;
+    text-align:center;
+}
+
+.footer h4{
+    margin-bottom:10px;
+}
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:42px;
+}
+
+.hero p{
+    font-size:20px;
+}
+
+}
+.hero{
+    height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+}
+
+.hero-content h1{
+    font-size:88px;
+    font-weight:700;
+    letter-spacing:-4px;
+}
+
+.hero-content p{
+    font-size:32px;
+    margin-top:10px;
+}
+
+.hero-iphone{
+    background:#060615;
+}
+
+.hero-dark{
+    background:#000;
+    color:white;
+}
+
+.hero-watch{
+    background:#f5f5f7;
+}
+.promo-grid{
+    max-width:1400px;
+    margin:80px auto;
+    padding:20px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:25px;
+}
+
+.promo-card{
+    background:#f5f5f7;
+    border-radius:30px;
+    padding:60px;
+    min-height:350px;
+}
+/* Apple Search Box */
+
+.search-container{
+    display:flex;
+    align-items:center;
+}
+
+.search-container form{
+    position:relative;
+}
+
+.search-container input{
+
+    width:180px;
+    height:34px;
+
+    border:none;
+    outline:none;
+
+    background:rgba(255,255,255,.12);
+
+    color:white;
+
+    padding:0 40px 0 15px;
+
+    border-radius:20px;
+
+    font-size:13px;
+
+    transition:.3s;
+}
+
+.search-container input:focus{
+    width:250px;
+    background:rgba(255,255,255,.18);
+}
+
+.search-container input::placeholder{
+    color:#cccccc;
+}
+
+.search-container button{
+
+    position:absolute;
+    right:10px;
+    top:50%;
+
+    transform:translateY(-50%);
+
+    background:none;
+    border:none;
+
+    color:white;
+    cursor:pointer;
+}
+.search-overlay{
+
+    position:absolute;
+    top:44px;
+    left:0;
+
+    width:100%;
+    min-height:350px;
+
+    background:#f5f5f7;
+
+    padding:40px;
+
+    display:none;
+
+    z-index:9998;
+}
+
+.search-overlay.active{
+    display:block;
+}
+
+.search-box{
+
+    max-width:1000px;
+    margin:auto;
+
+    display:flex;
+    align-items:center;
+
+    gap:15px;
+}
+
+.search-box input{
+
+    flex:1;
+
+    border:none;
+    outline:none;
+
+    background:transparent;
+
+    font-size:48px;
+    font-weight:600;
+
+    color:#1d1d1f;
+}
+
+.search-icon{
+    font-size:38px;
+}
+
+#close-search{
+    cursor:pointer;
+    font-size:28px;
+}
+
+.quick-links{
+
+    max-width:1000px;
+    margin:40px auto;
+}
+
+.quick-links h4{
+    color:#6e6e73;
+    margin-bottom:20px;
+}
+
+.quick-links a{
+
+    display:block;
+
+    color:#1d1d1f;
+
+    font-size:28px;
+
+    text-decoration:none;
+
+    margin-bottom:18px;
+}
+.navbar{
+    position:sticky;
+    top:0;
+    z-index:9999;
+    background:#0a0606;
+}
+
+.nav-item{
+    position:relative;
+}
+
+.mega-menu{
+    position:absolute;
+    top:48px;
+    left:50%;
+    transform:translateX(-50%);
+
+    width:1100px;
+    max-width:95vw;
+
+    background:#111;
+    color:white;
+
+    padding:40px 50px;
+
+    display:none;
+
+    grid-template-columns:2fr 1fr 1fr;
+    gap:60px;
+
+    border-radius:0 0 20px 20px;
+
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+
+    z-index:99999;
+}
+
+.nav-item:hover > .mega-menu{
+    display:grid;
+}
+
+.mega-title{
+    color:#6e6e73;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.big-link{
+    display:block;
+    text-decoration:none;
+    color:#1d1d1f;
+    font-size:28px;
+    font-weight:600;
+    margin-bottom:15px;
+}
+
+.small-link{
+    display:block;
+    text-decoration:none;
+    color:#1d1d1f;
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.big-link:hover,
+.small-link:hover{
+    color:#0071e3;
+}
+.navbar{
+    overflow:visible;
+}
+
+.mega-menu{
+    width:1100px;
+    max-width:95vw;
+    background:#111;
+
+    color:white;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.hero-iphone{
+    position:relative;
+    overflow:hidden;
+    border-radius:160px;
+}
+
+.hero-bg{
+    position:absolute;
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    z-index:1;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    color:white;
+}
+.hero{
+    position:relative;
+    overflow:hidden;
+    border-radius:130px;
+}
+
+.hero-bg{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+    z-index:1;
+}
+
+.hero::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:rgba(0,0,0,.25);
+    z-index:2;
+}
+
+.hero-content{
+    position:relative;
+    z-index:3;
+    color:white;
+}
+.promo-card{
+    position:relative;
+    overflow:hidden;
+
+    border-radius:30px;
+    min-height:400px;
+
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-start;
+
+    padding:50px;
+
+    color:white;
+}
+
+.promo-card img{
+    position:absolute;
+    top:0;
+    left:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    z-index:1;
+}
+
+.promo-card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+
+    background:rgba(0,0,0,.25);
+
+    z-index:2;
+}
+
+.promo-card h2,
+.promo-card p{
+    position:relative;
+    z-index:3;
+}
+/* Brand layout */
+.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}.brand{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+}
+
+
+/* Floating animation */
+
+.imart-logo{
+    animation:
+    floatLogo 4s ease-in-out infinite,
+    fadeInLogo 1s ease-out;
+}
+
+/* Glowing circle */
+
+.logo-circle{
+
+    filter:drop-shadow(0 0 8px rgba(41,151,255,.5));
+
+    animation:
+    pulseGlow 3s ease-in-out infinite;
+}
+
+/* Text */
+
+.logo-text{
+    fill:white;
+    font-size:42px;
+    font-weight:700;
+    font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+/* Store Name */
+
+.store-name{
+    color:white;
+    font-size:20px;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+
+/* Background glow */
+.logo-bg {
+  fill: #0d6efd;
+  filter: drop-shadow(0 0 10px rgba(13,110,253,0.6));
+  animation: glow 2.5s infinite alternate ease-in-out;
+}
+
+/* Text style */
+.logo-text {
+  fill: white;
+  font-size: 42px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+  font-weight: 700;
+  opacity: 1;
+  animation: fadeInText 1s ease forwards;
+  animation-delay: 0.4s;
+}
+
+/* Store name */
+.store-name{
+    color:#fff;
+    font-size:18px;
+    font-weight:600;
+    letter-spacing:.5px;
+}
+.search-overlay{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100vh;
+background:white;
+display:none;
+z-index:10000;
+padding-top:100px;
+}
+
+.search-overlay.active{
+display:block;
+}
+
+.search-box{
+max-width:900px;
+margin:auto;
+display:flex;
+align-items:center;
+gap:20px;
+padding:20px;
+}
+
+.search-box input{
+flex:1;
+border:none;
+outline:none;
+font-size:42px;
+background:none;
+}
+
+.search-icon{
+font-size:32px;
+}
+
+#close-search{
+font-size:30px;
+cursor:pointer;
+}
+
+.quick-links{
+max-width:900px;
+margin:40px auto;
+}
+
+.quick-links h4{
+color:#86868b;
+margin-bottom:20px;
+}
+
+.quick-links a{
+display:block;
+text-decoration:none;
+font-size:24px;
+color:#1d1d1f;
+margin-bottom:15px;
+}
+
+.quick-links a:hover{
+color:#0071e3;
+}
+.nav-search{
+    font-size:20px !important;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-size:18px;
+}
+
+.nav-search:hover{
+    color:#0071e3;
+}
+/* Float */
+
+@keyframes floatLogo{
+
+    0%{
+        transform:translateY(0px);
+    }
+
+    50%{
+        transform:translateY(-4px);
+    }
+
+    100%{
+        transform:translateY(0px);
+    }
+
+}
+
+/* Glow */
+
+@keyframes pulseGlow{
+
+    0%{
+        filter:
+        drop-shadow(0 0 5px rgba(41,151,255,.5));
+    }
+
+    50%{
+        filter:
+        drop-shadow(0 0 18px rgba(41,151,255,.9));
+    }
+
+    100%{
+        filter:
+        drop-shadow(0 0 5px rgba(41,151,255,.5));
+    }
+
+}
+
+/* Startup animation */
+
+@keyframes fadeInLogo{
+
+    from{
+        opacity:1;
+        transform:scale(.7);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
+
+}
+@media screen and (max-width:768px){
+
+    html,
+    body{
+        overflow-x:hidden;
+    }
+
+    .hero{
+        min-height:500px;
+        border-radius:0;
+    }
+
+    .hero-content{
+        width:95%;
+    }
+
+    .hero-content h1{
+        font-size:48px;
+        line-height:1;
+    }
+
+    .hero-content p{
+        font-size:20px;
+        margin-top:10px;
+    }
+
+    .hero-buttons{
+        display:flex;
+        justify-content:center;
+        gap:10px;
+        flex-wrap:wrap;
+    }
+
+    .promo-grid{
+        grid-template-columns:1fr;
+        padding:10px;
+    }
+
+    .promo-card{
+        min-height:250px;
+        padding:25px;
+    }
+
+    .products-title{
+        font-size:32px;
+    }
+
+    .grid{
+        grid-template-columns:1fr;
+    }
+
+    .card h3{
+        font-size:22px;
+    }
+
+    .price{
+        font-size:20px;
+    }
+}
+@media screen and (max-width:768px){
+
+    .navbar{
+        justify-content:flex-start;
+        overflow-x:auto;
+        gap:15px;
+        padding:0 10px;
+        white-space:nowrap;
+    }
+
+    .navbar::-webkit-scrollbar{
+        display:none;
+    }
+
+    .navbar a{
+        font-size:12px;
+    }
+
+    .store-name{
+        font-size:16px;
+    }
+}
+@media screen and (max-width:768px){
+
+    .hero-bg{
+        object-position:center;
+    }
+}
+</style>
+</head>
+
+<section class="hero hero-iphone">
+
+    <img
+        src="{% static 'images/iphone16pro.png' %}"
+        class="hero-bg"
+        alt="iPhone">
+
+    <div class="hero-content"><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+        <h1>iPhone 17 Pro</h1>
+
+        <p>Titanium. Powerful. Beautiful.</p>
+
+        <div class="hero-buttons">
+            <a href="#products" class="btn btn-primary">Buy</a>
+            <a href="#products" class="btn btn-secondary">Learn More</a>
+        </div>
+
+    </div>
+
+</section><br><br>
+
+<section class="hero hero-mac">
+
+    <img
+        src="{% static 'images/mac pro.png' %}"
+        class="hero-bg"
+        alt="MacBook Neo">
+
+    <div class="hero-content">
+
+        <h1>MacBook Neo</h1>
+
+        <p>Mind-blowing. Head-turning.</p>
+
+        <div class="hero-buttons">
+            <a href="#products" class="btn btn-primary">Buy</a>
+            <a href="#products" class="btn btn-secondary">Learn More</a>
+        </div>
+
+    </div>
+
+</section><br><br>
+
+<section class="hero hero-watch">
+
+    <img
+        src="{% static 'images/ultra.png' %}"
+        class="hero-bg"
+        alt="Apple Watch Ultra">
+
+    <div class="hero-content"><br><br><br><br><br><br><br>
+
+        <h1>Apple Watch Ultra</h1>
+
+        <p>The ultimate sports and adventure watch.</p>
+
+        <div class="hero-buttons">
+            <a href="#products" class="btn btn-primary">Buy</a>
+            <a href="#products" class="btn btn-secondary">Learn More</a>
+        </div>
+
+    </div>
+
+</section>
+<section class="promo-grid">
+
+    <div class="promo-card">
+
+        <img src="{% static 'images/airpods.jpg' %}" alt="AirPods">
+
+        <h2>AirPods Pro</h2>
+        <p>Adaptive Audio.</p>
+
+    </div>
+
+    <div class="promo-card">
+
+        <img src="{% static 'images/focus.jpg' %}" alt="Vision Pro">
+
+        <h2>Vision Pro</h2>
+        <p>Spatial Computing.</p>
+
+    </div>
+
+    <div class="promo-card">
+
+        <img src="{% static 'images/ipad-pro.png' %}" alt="iPad Pro">
+
+        <h2>iPad Pro</h2>
+        <p>Supercharged by M4.</p>
+
+    </div>
+
+    <div class="promo-card">
+
+        <img src="{% static 'images/17.png' %}" alt="Apple Intelligence">
+
+        <h2>Apple Intelligence</h2>
+        <p>Built for the future.</p>
+
+    </div>
+
+</section>
+<section id="products" class="products">
+
+    <h2 class="products-title">
+        Explore Our Products
+    </h2>
+
+    <div class="grid">
+
+        {% for product in products %}
+
+        <div class="card">
+
+           <a href="{% url 'product_detail' product.id %}">
+    {% if product.image %}
+    <img src="{{ product.image.url }}" alt="{{ product.name }}">
+{% else %}
+    <img src="{% static 'images/no-image.png' %}" alt="No Image">
+{% endif %}
+</a>
+
+            <div class="card-content">
+
+                <div class="category">
+                    {{ product.category }}
+                </div>
+
+                <h3>{{ product.name }}</h3>
+
+                <div class="price">
+                    ₹{{ product.price }}
+                </div>
+
+                <div class="desc">
+                    {{ product.description|truncatewords:15 }}
+                </div>
+
+                <div class="actions">
+
+                    <a href="{% url 'product_detail' product.id %}"
+                       class="cart-btn">
+                        View
+                    </a>
+
+                    <a href="{% url 'buy_now' product.id %}"
+                       class="buy-btn">
+                        Buy
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+<h3>iMart</h3>
+
+<p>Premium Apple-inspired shopping experience.</p>
+
+<br>
+
+<p>
+iPhone • Mac • iPad • Watch • AirPods • Vision
+</p>
+
+<br>
+
+<p>
+© 2026 iMart
+</p>
+
+</footer>
+<script>
+
+const searchBtn =
+document.getElementById("search-btn");
+
+const overlay =
+document.getElementById("search-overlay");
+
+const closeBtn =
+document.getElementById("close-search");
+
+searchBtn.addEventListener("click", function(e){
+
+    e.preventDefault();
+
+    overlay.classList.add("active");
+
+    document
+    .getElementById("search-input")
+    .focus();
+
+});
+
+closeBtn.addEventListener("click", function(){
+
+    overlay.classList.remove("active");
+
+});
+
+window.addEventListener("keydown", function(e){
+
+    if(e.key==="Escape"){
+
+        overlay.classList.remove("active");
+
+    }
+
+});
+
+</script>
+{% endblock %}

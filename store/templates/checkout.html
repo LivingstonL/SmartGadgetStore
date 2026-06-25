@@ -1,0 +1,413 @@
+{% extends 'store/base.html' %}
+
+{% block title %}
+Checkout
+{% endblock %}
+
+{% block content %}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Checkout - Smart Gadget Store</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<style>
+
+:root{
+    --apple-blue:#0071e3;
+    --bg:#f5f5f7;
+    --card:rgba(255,255,255,.75);
+    --border:rgba(255,255,255,.4);
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:var(--bg);
+    font-family:'Inter',sans-serif;
+    color:#1d1d1f;
+}
+
+.hero{
+    text-align:center;
+    padding:70px 20px 40px;
+}
+
+.hero h1{
+    font-size:56px;
+    font-weight:800;
+    letter-spacing:-2px;
+}
+
+.hero p{
+    color:#6e6e73;
+    font-size:20px;
+    margin-top:10px;
+}
+
+.wrapper{
+    max-width:1450px;
+    margin:auto;
+    padding:20px;
+}
+
+.checkout-grid{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:35px;
+}
+
+.glass-card{
+    background:rgba(255,255,255,.72);
+    backdrop-filter:blur(25px);
+    border:1px solid rgba(255,255,255,.5);
+    border-radius:30px;
+    padding:35px;
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.05),
+        inset 0 1px 0 rgba(255,255,255,.7);
+    margin-bottom:25px;
+}
+
+.product-section{
+    display:flex;
+    gap:40px;
+    align-items:center;
+}
+
+.product-image{
+    width:320px;
+    max-width:100%;
+    transition:.4s;
+}
+
+.product-image:hover{
+    transform:scale(1.05);
+}
+
+.product-name{
+    font-size:40px;
+    font-weight:800;
+    margin-bottom:10px;
+}
+
+.product-price{
+    color:var(--apple-blue);
+    font-size:32px;
+    font-weight:700;
+}
+
+.badge{
+    display:inline-block;
+    background:#e8f4ff;
+    color:var(--apple-blue);
+    padding:8px 15px;
+    border-radius:999px;
+    margin-top:15px;
+    font-size:14px;
+    font-weight:600;
+}
+
+.section-title{
+    font-size:28px;
+    margin-bottom:25px;
+    font-weight:700;
+}
+
+.form-group{
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+input,
+select{
+    width:100%;
+    height:58px;
+    padding:0 18px;
+    border-radius:18px;
+    border:1px solid #ddd;
+    font-size:16px;
+    background:white;
+}
+
+input:focus,
+select:focus{
+    outline:none;
+    border-color:var(--apple-blue);
+}
+
+.summary{
+    position:sticky;
+    top:30px;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:18px;
+    font-size:17px;
+}
+
+.total{
+    border-top:1px solid #e5e5e5;
+    padding-top:20px;
+    margin-top:20px;
+    font-size:28px;
+    font-weight:800;
+}
+
+.order-btn{
+    width:100%;
+    height:58px;
+    border:none;
+    border-radius:999px;
+    background:var(--apple-blue);
+    color:white;
+    font-size:18px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.3s;
+    margin-top:25px;
+}
+
+.order-btn:hover{
+    transform:translateY(-2px);
+}
+
+.secure{
+    text-align:center;
+    margin-top:15px;
+    color:#6e6e73;
+    font-size:14px;
+}
+
+.delivery{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+}
+
+.info-card{
+    background:#fff;
+    border-radius:20px;
+    padding:20px;
+    border:1px solid #eee;
+}
+
+.info-card h4{
+    margin-bottom:8px;
+}
+
+.fade{
+    animation:fade .6s ease;
+}
+
+@keyframes fade{
+    from{
+        opacity:0;
+        transform:translateY(20px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+@media(max-width:1000px){
+
+.checkout-grid{
+    grid-template-columns:1fr;
+}
+
+.summary{
+    position:relative;
+    top:auto;
+}
+
+.product-section{
+    flex-direction:column;
+    text-align:center;
+}
+
+.hero h1{
+    font-size:40px;
+}
+
+.product-name{
+    font-size:30px;
+}
+
+.delivery{
+    grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+<div class="hero fade">
+    <h1>Secure Checkout</h1>
+    <p>Complete your order in just a few steps.</p>
+</div>
+
+<div class="wrapper">
+
+<div class="checkout-grid">
+
+<div>
+
+{% if product %}
+
+<div class="glass-card fade">
+
+<div class="product-section">
+
+<img src="{{ product.image.url }}" class="product-image">
+
+<div>
+
+<h2 class="product-name">
+{{ product.name }}
+</h2>
+
+<div class="product-price">
+₹{{ product.price }}
+</div>
+
+<div class="badge">
+Free Delivery • In Stock
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endif %}
+
+<div class="glass-card fade">
+
+<h3 class="section-title">
+Shipping Information
+</h3>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Full Name</label>
+        <input type="text" name="customer_name" required>
+    </div>
+
+    <div class="form-group">
+        <label>Phone Number</label>
+        <input type="text" name="phone" required>
+    </div>
+
+    
+
+    <div class="form-group">
+        <label>Delivery Address</label>
+        <input type="text" name="address" required>
+    </div>
+
+    <div class="form-group">
+        <label>Payment Method</label>
+        <select name="payment_method">
+            <option value="UPI">UPI</option>
+            <option value="COD">Cash on Delivery</option>
+            <option value="CARD">Credit Card</option>
+            <option value="DEBIT">Debit Card</option>
+        </select>
+    </div>
+
+    <button type="submit" class="order-btn">
+        Place Order
+    </button>
+</form>
+<div class="secure">
+🔒 Secured Apple Checkout
+</div>
+
+
+</form>
+
+</div>
+
+</div>
+
+<div>
+
+<div class="glass-card summary fade">
+
+<h3 class="section-title">
+Order Summary
+</h3>
+
+{% if product %}
+
+<div class="summary-row">
+<span>Product</span>
+<span>{{ product.name }}</span>
+</div>
+
+<div class="summary-row">
+<span>Quantity</span>
+<span>1</span>
+</div>
+
+<div class="summary-row">
+<span>Shipping</span>
+<span>FREE</span>
+</div>
+
+<div class="summary-row">
+<span>GST</span>
+<span>Included</span>
+</div>
+
+<div class="summary-row total">
+<span>Total</span>
+<span>₹{{ total }}</span>
+</div>
+
+{% else %}
+
+{% for item in items %}
+
+<div class="summary-row">
+<span>{{ item.product.name }}</span>
+<span>x{{ item.quantity }}</span>
+</div>
+
+{% endfor %}
+
+<div class="summary-row total">
+<span>Total</span>
+<span>₹{{ total }}</span>
+</div>
+
+{% endif %}
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+{% endblock %}

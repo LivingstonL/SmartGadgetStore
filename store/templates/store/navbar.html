@@ -1,0 +1,396 @@
+
+<nav class="navbar">
+
+    <a href="/" class="brand">
+
+<svg width="42" height="42" viewBox="0 0 100 100">
+
+    <defs>
+        <linearGradient id="imartGradient"
+                        x1="0%" y1="0%"
+                        x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#2997ff"/>
+            <stop offset="100%" stop-color="#0071e3"/>
+        </linearGradient>
+    </defs>
+
+    <circle
+        cx="50"
+        cy="50"
+        r="42"
+        fill="url(#imartGradient)"
+    />
+
+    <text
+        x="50%"
+        y="57%"
+        text-anchor="middle"
+        fill="white"
+        font-size="42"
+        font-weight="700"
+        font-family="SF Pro Display, Arial">
+
+        iM
+
+    </text>
+
+</svg>
+
+<span class="store-name">iMart</span>
+
+</a>
+
+    <!-- Store -->
+  <div class="nav-item">
+    <li>
+    <a href="{% url 'my_orders' %}">My Orders</a>
+</li>
+
+    <div class="mega-menu">
+        <div>
+            <div class="mega-title">Shop</div>
+
+            <a href="{% url 'home' %}" class="big-link">Shop the Latest</a>
+            <a href="{% url 'category' 'Mac' %}" class="big-link">Mac</a>
+            <a href="{% url 'category' 'iPhone' %}" class="big-link">iPhone</a>
+            <a href="{% url 'category' 'iPad' %}" class="big-link">iPad</a>
+            <a href="{% url 'category' 'Watch' %}" class="big-link">Apple Watch</a>
+        </div>
+
+        <div>
+            <div class="mega-title">Quick Links</div>
+            <a href="{% url 'orders' %}" class="small-link">Order Status</a>
+            <a href="{% url 'cart' %}" class="small-link">Cart</a>
+        </div>
+
+        <div>
+            <div class="mega-title">Store Services</div>
+            <a href="#" class="small-link">Support</a>
+        </div>
+    </div>
+</div>
+
+    <!-- Mac -->
+    <div class="nav-item">
+      <a href="{% url 'category' 'Mac' %}">Mac</a>
+
+        <div class="mega-menu">
+            <div>
+                <div class="mega-title">Explore Mac</div>
+
+                <a href="#" class="big-link">MacBook Air</a>
+                <a href="#" class="big-link">MacBook Pro</a>
+                <a href="#" class="big-link">iMac</a>
+                <a href="#" class="big-link">Mac mini</a>
+                <a href="#" class="big-link">Mac Studio</a>
+            </div>
+
+            <div>
+                <div class="mega-title">Shop Mac</div>
+
+                <a href="#" class="small-link">Buy Mac</a>
+                <a href="#" class="small-link">Accessories</a>
+                <a href="#" class="small-link">Trade In</a>
+            </div>
+
+            <div>
+                <div class="mega-title">More from Mac</div>
+
+                <a href="#" class="small-link">macOS</a>
+                <a href="#" class="small-link">AppleCare+</a>
+                <a href="#" class="small-link">Support</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- iPad -->
+    <div class="nav-item">
+      <a href="{% url 'category' 'iPad' %}">iPad</a>
+
+        <div class="mega-menu">
+            <div>
+                <div class="mega-title">Explore iPad</div>
+
+                <a href="#" class="big-link">iPad Pro</a>
+                <a href="#" class="big-link">iPad Air</a>
+                <a href="#" class="big-link">iPad</a>
+                <a href="#" class="big-link">iPad mini</a>
+            </div>
+
+            <div>
+                <div class="mega-title">Shop iPad</div>
+
+                <a href="#" class="small-link">Buy iPad</a>
+                <a href="#" class="small-link">Apple Pencil</a>
+                <a href="#" class="small-link">Accessories</a>
+            </div>
+
+            <div>
+                <div class="mega-title">More from iPad</div>
+
+                <a href="#" class="small-link">iPadOS</a>
+                <a href="#" class="small-link">AppleCare+</a>
+                <a href="#" class="small-link">Support</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- iPhone -->
+    <div class="nav-item">
+        <a href="{% url 'category' 'iPhone' %}">iPhone</a>
+
+        <div class="mega-menu">
+            <div>
+                <div class="mega-title">Explore iPhone</div>
+
+                <a href="#" class="big-link">iPhone 17 Pro</a>
+                <a href="#" class="big-link">iPhone Air</a>
+                <a href="#" class="big-link">iPhone 17</a>
+                <a href="#" class="big-link">iPhone 16</a>
+            </div>
+
+            <div>
+                <div class="mega-title">Shop iPhone</div>
+
+                <a href="#" class="small-link">Buy iPhone</a>
+                <a href="#" class="small-link">Accessories</a>
+                <a href="#" class="small-link">Trade In</a>
+            </div>
+
+            <div>
+                <div class="mega-title">More from iPhone</div>
+
+                <a href="#" class="small-link">iOS</a>
+                <a href="#" class="small-link">Apple Intelligence</a>
+                <a href="#" class="small-link">AppleCare+</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Watch -->
+    <div class="nav-item">
+        <a href="{% url 'category' 'Watch' %}">Watch</a>
+        <div class="mega-menu">
+            <div>
+                <div class="mega-title">Explore Watch</div>
+
+                <a href="#" class="big-link">Watch Ultra</a>
+                <a href="#" class="big-link">Series 10</a>
+                <a href="#" class="big-link">Watch SE</a>
+            </div>
+
+            <div>
+                <div class="mega-title">Shop Watch</div>
+
+                <a href="#" class="small-link">Bands</a>
+                <a href="#" class="small-link">Accessories</a>
+            </div>
+
+            <div>
+                <div class="mega-title">More from Watch</div>
+
+                <a href="#" class="small-link">watchOS</a>
+                <a href="#" class="small-link">Fitness+</a>
+                <a href="#" class="small-link">Support</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- AirPods -->
+    <div class="nav-item">
+        <a href="{% url 'category' 'AirPods' %}">AirPods</a>
+
+        <div class="mega-menu">
+            <div>
+                <div class="mega-title">Explore AirPods</div>
+
+                <a href="#" class="big-link">AirPods Pro</a>
+                <a href="#" class="big-link">AirPods 4</a>
+                <a href="#" class="big-link">AirPods Max</a>
+            </div>
+
+            <div>
+                <div class="mega-title">Shop AirPods</div>
+
+                <a href="#" class="small-link">Accessories</a>
+                <a href="#" class="small-link">Compare</a>
+            </div>
+
+            <div>
+                <div class="mega-title">More from AirPods</div>
+
+                <a href="#" class="small-link">Apple Music</a>
+                <a href="#" class="small-link">Support</a>
+            </div>
+        </div>
+    </div>
+    <!-- TV & Home -->
+<div class="nav-item">
+    <a href="{% url 'category' 'TVHome' %}">TV & Home</a>
+
+    <div class="mega-menu">
+
+        <div>
+            <div class="mega-title">Explore TV & Home</div>
+
+            <a href="#" class="big-link">Apple TV 4K</a>
+            <a href="#" class="big-link">HomePod</a>
+            <a href="#" class="big-link">HomePod mini</a>
+            <a href="#" class="big-link">Apple TV App</a>
+            <a href="#" class="big-link">Apple TV+</a>
+        </div>
+
+        <div>
+            <div class="mega-title">Shop TV & Home</div>
+
+            <a href="#" class="small-link">Shop Apple TV 4K</a>
+            <a href="#" class="small-link">Shop HomePod</a>
+            <a href="#" class="small-link">Shop HomePod mini</a>
+            <a href="#" class="small-link">TV & Home Accessories</a>
+        </div>
+
+        <div>
+            <div class="mega-title">More from TV & Home</div>
+
+            <a href="#" class="small-link">Apple TV Support</a>
+            <a href="#" class="small-link">HomePod Support</a>
+            <a href="#" class="small-link">Apple TV+ Support</a>
+            <a href="#" class="small-link">Home App</a>
+            <a href="#" class="small-link">AirPlay</a>
+        </div>
+
+    </div>
+</div>
+<!-- Accessories -->
+<div class="nav-item">
+    <a href="{% url 'category' 'Accessories' %}">Accessories</a>
+
+    <div class="mega-menu">
+
+        <div>
+            <div class="mega-title">Shop Accessories</div>
+
+            <a href="#" class="big-link">MagSafe Charger</a>
+            <a href="#" class="big-link">AirTag</a>
+            <a href="#" class="big-link">Apple Pencil Pro</a>
+            <a href="#" class="big-link">USB-C Cable</a>
+            <a href="#" class="big-link">iPhone Cases</a>
+        </div>
+
+        <div>
+            <div class="mega-title">Popular</div>
+
+            <a href="#" class="small-link">Wireless Chargers</a>
+            <a href="#" class="small-link">Power Adapters</a>
+            <a href="#" class="small-link">Watch Bands</a>
+            <a href="#" class="small-link">AirPods Accessories</a>
+        </div>
+
+        <div>
+            <div class="mega-title">More Accessories</div>
+
+            <a href="#" class="small-link">New Arrivals</a>
+            <a href="#" class="small-link">Best Sellers</a>
+            <a href="#" class="small-link">Support</a>
+        </div>
+
+    </div>
+</div>
+
+   <!-- Search Overlay -->
+
+<div id="search-overlay" class="search-overlay">
+
+<div class="search-box">
+
+<span class="search-icon">
+🔍
+</span>
+
+<form method="GET" action="{% url 'home' %}" style="flex:1;">
+
+<input
+type="text"
+id="search-input"
+name="q"
+placeholder="Search iMart">
+
+</form>
+
+<span id="close-search">
+✕
+</span>
+
+</div>
+
+<div class="quick-links">
+
+<h4>Popular Searches</h4>
+
+<a href="?q=iPhone">
+iPhone
+</a>
+
+<a href="?q=MacBook">
+MacBook
+</a>
+
+<a href="?q=iPad">
+iPad
+</a>
+
+<a href="?q=Watch">
+Apple Watch
+</a>
+
+<a href="?q=AirPods">
+AirPods
+</a>
+
+<a href="?q=Vision">
+Vision Pro
+</a>
+
+</div>
+
+</div>
+<!-- Search -->
+
+<a href="#" id="search-btn" class="nav-search">
+    🔍
+</a>
+    <!-- Cart -->
+   <a href="{% url 'cart' %}" class="cart-link">
+    🛒 Cart
+</a>
+
+</nav>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+
+    const searchBtn = document.getElementById("search-btn");
+    const overlay = document.getElementById("search-overlay");
+    const closeBtn = document.getElementById("close-search");
+
+    if(searchBtn){
+        searchBtn.addEventListener("click", function(e){
+            e.preventDefault();
+            overlay.classList.add("active");
+
+            const input =
+            document.getElementById("search-input");
+
+            if(input){
+                input.focus();
+            }
+        });
+    }
+
+    if(closeBtn){
+        closeBtn.addEventListener("click", function(){
+            overlay.classList.remove("active");
+        });
+    }
+
+});
+</script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Buy Now</title>
+
+    <style>
+        body{
+            font-family:Arial;
+            background:#f4f4f4;
+            text-align:center;
+            padding:30px;
+        }
+
+        .box{
+            background:white;
+            width:400px;
+            margin:auto;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 0 10px gray;
+        }
+
+        img{
+            width:250px;
+            height:250px;
+            object-fit:cover;
+        }
+
+        .price{
+            color:green;
+            font-size:24px;
+            font-weight:bold;
+        }
+
+        button{
+            background:#ff9900;
+            border:none;
+            padding:12px 25px;
+            border-radius:5px;
+            cursor:pointer;
+            font-size:18px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+
+    <img src="{{ product.image }}" alt="Product">
+
+    <h2>{{ product.name }}</h2>
+
+    <p><b>Brand:</b> {{ product.brand }}</p>
+
+    <p class="price">₹{{ product.price }}</p>
+
+    <p>{{ product.description }}</p>
+
+   <a href="{% url 'payment' product.id %}">
+    <button>Proceed to Payment</button>
+</a>
+
+</div>
+
+</body>
+</html>

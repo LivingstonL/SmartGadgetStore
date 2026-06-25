@@ -1,0 +1,315 @@
+{% extends 'store/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ category }}
+{% endblock %}
+
+{% block content %}
+
+
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+}
+
+.main-content{
+background:#fff;
+color:#1d1f;
+}
+
+/* HERO */
+
+.hero{
+position:relative;
+height:100vh;
+overflow:hidden;
+}
+
+.hero img{
+width:100%;
+height:100%;
+object-fit:cover;
+}
+
+.hero-content{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+color:rgb(12, 1, 1);
+}
+
+.hero-content h1{
+font-size:110px;
+font-weight:700;
+letter-spacing:-5px;
+}
+
+.hero-content p{
+font-size:34px;
+margin-top:10px;
+}
+
+.hero-btn{
+display:inline-block;
+margin-top:25px;
+padding:14px 30px;
+background:#0071e3;
+color:white;
+border-radius:30px;
+text-decoration:none;
+}
+
+/* PRODUCT NAV */
+
+.product-nav{
+position:sticky;
+top:48px;
+background:white;
+z-index:999;
+padding:15px;
+display:flex;
+justify-content:center;
+gap:25px;
+border-bottom:1px solid #eee;
+}
+
+.product-nav a{
+text-decoration:none;
+color:#0071e3;
+font-size:14px;
+}
+
+/* PRODUCTS */
+
+.products{
+max-width:1400px;
+margin:auto;
+padding:80px 20px;
+}
+
+.products h2{
+font-size:56px;
+text-align:center;
+margin-bottom:50px;
+}
+
+.grid{
+display:grid;
+grid-template-columns:
+repeat(auto-fit,minmax(320px,1fr));
+gap:30px;
+}
+
+.card{
+background:white;
+border-radius:30px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(0,0,0,.08);
+transition:.35s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+}
+
+.card img{
+width:100%;
+height:320px;
+object-fit:contain;
+padding:25px;
+}
+
+.card-content{
+padding:25px;
+text-align:center;
+}
+
+.card h3{
+font-size:32px;
+}
+
+.price{
+font-size:28px;
+font-weight:700;
+color:#0071e3;
+margin:15px 0;
+}
+
+.btn-row{
+display:flex;
+gap:10px;
+}
+
+.buy-btn,
+.cart-btn{
+flex:1;
+padding:12px;
+border-radius:25px;
+text-decoration:none;
+}
+
+.buy-btn{
+background:#0071e3;
+color:white;
+}
+
+.cart-btn{
+border:1px solid #0071e3;
+color:#0071e3;
+}
+</style>
+
+<section class="hero">
+
+    <img src="{% static hero_image %}"   alt="{{ category }}" class="hero-bg">
+
+    <div class="hero-content">
+
+        <h1>{{ category }}</h1>
+
+        <p>
+        {% if category == "iPhone" %}
+            Built for Apple Intelligence.
+        {% elif category == "Mac" %}
+            Power to do more.
+        {% elif category == "iPad" %}
+            Touch. Draw. Create.
+        {% elif category == "Watch" %}
+            Healthy. Active. Connected.
+        {% elif category == "AirPods" %}
+            Immersive sound experience.
+        {% elif category == "TVHome" %}
+            Watch Apple TV anywhere on the Apple TV app..
+        {% endif %}
+        </p>
+
+        <a href="#products" class="hero-btn">
+            Shop {{ category }}
+        </a>
+
+    </div>
+
+</section>
+<div class="product-nav">
+
+<a href="#products">Models</a>
+<a href="#highlights">Highlights</a>
+<a href="#compare">Compare</a>
+<a href="#footer">Support</a>
+
+</div>
+<section id="products" class="products">
+
+<h2>Explore {{ category }}</h2>
+
+<div class="grid">
+
+{% for product in products %}
+
+<div class="card">
+
+{% if product.image %}
+<img src="{{ product.image.url }}" alt="{{ product.name }}">
+{% else %}
+<img src="{% static 'images/no-image.png' %}" alt="No Image">
+{% endif %}
+
+<div class="card-content">
+
+<h3>{{ product.name }}</h3>
+
+<p>{{ product.description|truncatewords:12 }}</p>
+
+<div class="price">
+₹{{ product.price }}
+</div>
+
+<div class="btn-row">
+
+<a href="{% url 'buy_now' product.id %}"
+class="buy-btn">
+Buy
+</a>
+
+<a href="{% url 'add_to_cart' product.id %}"
+class="cart-btn">
+Add to Cart
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+</section>
+
+<section id="highlights"
+style="
+background:black;
+color:white;
+text-align:center;
+padding:120px 20px;">
+
+<h2 style="font-size:72px;">
+Titanium.
+So strong.
+So light.
+So Pro.
+</h2>
+
+</section>
+
+<section id="compare"
+style="
+background:#f5f5f7;
+padding:120px 20px;
+text-align:center;">
+
+<h2 style="font-size:56px;">
+Which iPhone is right for you?
+</h2>
+
+<br>
+
+<a href="#products"
+class="hero-btn">
+Compare Models
+</a>
+
+</section>
+<footer id="footer"
+style="
+background:#f5f5f7;
+padding:80px 20px;
+text-align:center;">
+
+<h3>Smart Gadget Store</h3>
+
+<br>
+
+<p>
+iPhone • Mac • iPad • Watch • AirPods • Vision
+</p>
+
+<br>
+
+<p>
+© 2026 Smart Gadget Store
+</p>
+
+</footer>
+
+{% endblock %}
